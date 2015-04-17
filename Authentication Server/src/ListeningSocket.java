@@ -66,7 +66,7 @@ public class ListeningSocket extends Thread implements Runnable {
 		
 		//appends timestamp
 		SimpleDateFormat format = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
-		Date cDate = new Date(System.currentTimeMillis());
+		Date cDate = new Date(System.currentTimeMillis() + 60000);
 		String date = format.format(cDate);
 		System.out.println("Timestamp: " + date.toString());
 		//Token is appended to the front to make it readable by the gateway 
