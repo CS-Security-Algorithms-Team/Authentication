@@ -65,7 +65,7 @@ public class ListeningSocket extends Thread implements Runnable {
 		String s = new BigInteger(130, random).toString(32);
 		
 		//appends timestamp
-		SimpleDateFormat format = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z");
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
 		Date cDate = new Date(System.currentTimeMillis() + 60000);
 		String date = format.format(cDate);
 		System.out.println("Timestamp: " + date.toString());
