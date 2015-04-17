@@ -4,21 +4,19 @@ import java.util.Scanner;
 public class Main {
 	public static void main(String args[]){
 		AuthenticationServer server;
-		int lPort = 9989;
-		int sPort = 9999;
+		int port = 8888;
 		
-		if(args.length > 2){
+		if(args.length > 1){
 			try{
-				lPort = Integer.parseInt(args[0]);
-				sPort = Integer.parseInt(args[1]);
+				port = Integer.parseInt(args[0]);
 			}catch(NumberFormatException e){
-				System.out.println("Usage: AuthenticationServer <Listening Port> <Sending Port>");
+				System.out.println("Usage: AuthenticationServer <port>");
 				System.exit(1);
 			}
 		}
 		
-		System.out.println("Authentication Server Starting \nListening: " + lPort + "\nSending: " + sPort);
-		server = new AuthenticationServer(lPort, sPort);
+		System.out.println("Authentication Server Starting \nport: " + port);
+		server = new AuthenticationServer(port);
 		serverStart(server);
 		
 	}

@@ -13,63 +13,47 @@ public class ListeningSocket extends Thread implements Runnable {
 	private DataInputStream in;
 	private DataOutputStream out;
 	private String message;
-	private int lPort;
-	private int sPort;
+	private int port;
 	
-	public ListeningSocket(int l, int s){
+	public ListeningSocket(int p){
 		message = "NaN";
-		lPort = l;
-		sPort = s;
-		/*
+		port = p;
+		
 		try {
-			server = new ServerSocket(4848);
+			server = new ServerSocket(port);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		*/
+		
 	}
 	@Override
 	public void run() {
-		while(!this.isInterrupted()){
-			try {
-				//Server is initialized in the while loop to avoid a JVM bind
-				//after several iterations of the loop over the same socket. 
-				//[Note*] Use higher ports since lower ports seem to bind more frequently.
-				server = new ServerSocket(lPort);
-				//
+		try{
+			while(!this.isInterrupted()){
 				System.out.println("Waiting for connection..");
 				socket = server.accept();
-				//
+				
 				in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
 				message = in.readUTF();
 				System.out.println("Message recieved: " + message + " from " + socket.getInetAddress());
-				socket.close();
-				
-				socket = new Socket("127.0.0.1", sPort);
+
 				out = new DataOutputStream(socket.getOutputStream());
 				out.writeUTF(generateToken());
 				out.flush();
 				socket.close();
-				server.close();
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.exit(1);
-				break;
 			}
-		}
-		
+			server.close();
+			
+		}catch(IOException e){
+			e.printStackTrace();
+		}	
 	}
 	
 	
-	public int getPortListen(){
-		return lPort;
+	public int getPort(){
+		return port;
 	}
 	
-	public int getPortSending(){
-		return sPort;
-	}
 	
 	public String getMessage(){
 		return message;

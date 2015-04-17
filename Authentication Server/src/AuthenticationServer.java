@@ -2,8 +2,8 @@
 public class AuthenticationServer {
 	private ListeningSocket listen;
 	
-	public AuthenticationServer(int lPort, int sPort){
-		listen = new ListeningSocket(lPort, sPort);
+	public AuthenticationServer(int port){
+		listen = new ListeningSocket(port);
 	}
 	
 	public void start(){
@@ -15,8 +15,7 @@ public class AuthenticationServer {
 	}
 	
 	public void getDetails(){
-		System.out.println("Listening on port: " + listen.getPortListen());
-		System.out.println("Broadcasting on port: " + listen.getPortSending());
+		System.out.println("Port: " + listen.getPort());
 		System.out.println("Last message recieved: " + listen.getMessage());
 	}
 	
